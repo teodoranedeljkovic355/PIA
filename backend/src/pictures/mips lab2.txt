@@ -1,0 +1,194 @@
+*** Paljenje diode ***
+
+1. U CubeMX izaberemo pin i postavimo ga kao GPIO_Output.
+Categories -> GPIO -> podesavanje pina:
+output level: low
+gpio mode: push pull
+pull up - mada mislim da je nebitno
+=>generate code
+
+2.Eclipse: 
+Diodu palimo pomocu : HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+
+-----------------------------------
+
+*** Detektovanje falling edge ***
+
+1. CubeMX: pin-EXTI
+with Falling edge trigger detection
+pull-up
+nvic->enable 
+=>generate code
+
+2. Eclipse: stm32f1xx_it.c ->  EXTIx_IRQHandler() -> HAL_GPIO_EXTI_IRQHandler() -> prekopiramo potpis callback funkcije koja se poziva, i definisemo je u gpio.c. U njoj uradimo sta se trazi
+
+--------------------------------------
+
+*** Sedmosegmentni displej - ispis 1234 i tajmer ***
+
+1. CubeMX: 
+Pinouts&Config->Timers->Tim1:
+Clock Source: Internal clock
+-Parametar settings:
+prescalar:999
+counter mode: up
+counter period: 79
+no division
+
+TIM1->NVIC->enable update interrupt
+
+-pinovi svi su gpio output:
+low lvl, push pull mode, pull up, low
+
+=>generate code
+
+2. Eclipse: 
+ HAL_TIM_Base_Start(&htim1); // u mainu
+
+stm32f1xx_it.c -> TIM1_UP_IRQHandler() -> HAL_TIM_IRQHandler(&htim1) -> nadjemo TIM Update event : HAL_TIM_PeriodElapsedCallback(htim) - redefinisemo callback void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+Tu pisemo sve.
+
+uint8_t cnt = 0;
+uint8_t sek = 0;
+uint8_t min = 0;
+uint8_t tek = 0;
+uint8_t cifre[] = { 0, 0, 0, 0};
+uint8_t seven_seg[] = { 0x81, 0xCF, 0x92, 0x86, 0xCC, 0xA4, 0xA0, 0x8F, 0x80, 0x84};
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim->Instance == htim1.Instance)
+	{
+		//za stopericu
+		if (++cnt == 100)
+		{
+			cnt = 0;
+			if (++sek == 60)
+			{
+				sek = 0;
+				if (++min == 60)
+				{
+					min = 0;
+				}
+			}
+		}
+
+		cifre[3] = sek % 10;
+		cifre[2] = sek / 10;
+		cifre[1] = min % 10;
+		cifre[0] = min / 10;
+		//za stopericu
+
+		//za sve
+		tek = (tek + 1) % 4;
+
+		GPIOC->ODR &= 0x0FF;
+		GPIOC->ODR &= ~0xFF;
+		GPIOC->ODR |= seven_seg[cifre[tek]];
+		GPIOC->ODR |= (0x1 << (tek + 8));
+
+
+
+	}
+
+}
+
+Za ispis samo 1234 - stavimo uint8_t cifre[] = { 1, 2, 3, 4}; 
+
+-----------------------------------------------------------
+
+*** Reset stoperice na dugme ***
+ U prekidnu rutinu HAL_GPIO_EXTI_Callback koji smo radili pod b, dodamo :
+sek = 0; min = 0; cnt = 0; tek = 0;
+cifre[0] = 0;
+cifre[1] = 0;
+cifre[2] = 0;
+cifre[3] = 0;
+a na vrhu fajla dodati:
+extern uint8_t sek, min, tek, cnt;
+extern uint8_t cifre[];
+
+------------------------------------------------
+
+*** Racunanje frekvencije na analognom input pinu ***
+
+1. CubeMX:
+Dodali smo u TIM1 channel1 kao input capture direct mode, omogucili prekid u NVIC.Moze da se bira za channel1 u para settings rising/falling.
+
+2. Eclipse:
+U main.c HAL_TIM_IC_Start_IT(&htim1, TIM_CHANNEL_1); idemo u _it.c na TIM_CC_IRQHandler -> HAL_TIM_IRQHandler -> htim->IC_CaptureCallback(htim);
+Redefinisemo void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);
+FORMULA ZA FREKVENCIJU: freq = FREQ_CNT/ticksElapsed; to znaci da je interni clock FREQ_CNT. 
+
+#define FREQ_CNT 8000
+#define ARR 79
+
+typedef enum{
+	PRVA_RISING, SLEDECA_RISING
+} Stanje;
+
+uint32_t volatile timeStampStart = 0, timeStampEnd = 0, ticksElapsed = 0;
+float volatile freq = 0;
+Stanje stanje = PRVA_RISING;
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim->Instance == htim1.Instance && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
+		switch(stanje){
+		case PRVA_RISING:
+			timeStampStart = HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
+			overflow = 0;
+			stanje = SLEDECA_RISING;
+			break;
+		case SLEDECA_RISING:
+			timeStampEnd= HAL_TIM_ReadCapturedValue(&htim1, TIM_CHANNEL_1);
+			ticksElapsed = timeStampEnd + overflow * (ARR+1) - timeStampStart; //tolko je proslo tickova
+			//matematika
+			freq = (float)FREQ_CNT/(float)ticksElapsed;
+			freq *= 1000;
+			timeStampStart = timeStampEnd;
+			overflow = 0;
+			break;
+		}
+	}
+}
+
+------------------------------
+*** Dugme - ispis frekvencije ***
+cubemx, pb10 kao gpio_exti10 i tjt
+u prekidnoj rutini HAL_GPIO_EXTI_Callback kad se pritisne pin10 ris flag se toggluje i menja se flag u HAL_TIM_PeriodElapsedCallback i u zavisnosti od njega se iscrtava vreme ili frekvencija
+
+HAL_GPIO_EXTI_Callback : 
+if (GPIO_Pin == GPIO_PIN_10)
+	{
+		if (ris)
+		{
+			flag = 1;
+			ris = 0;
+		}
+		else
+		{
+			flag = 0;
+			ris = 1;
+		}
+	}
+
+HAL_TIM_PeriodElapsedCallback : 
+if (flag == 0)
+		{
+			cifre[3] = sek % 10;
+			cifre[2] = sek / 10;
+			cifre[1] = min % 10;
+			cifre[0] = min / 10;
+		}
+		else
+		{
+			uint32_t frequ = freq;
+			cifre[3] = frequ % 10;
+			cifre[2] = (frequ / 10) % 10;
+			cifre[1] = frequ / 100;
+			cifre[0] = 0;
+		}
+
+----------------------------
+

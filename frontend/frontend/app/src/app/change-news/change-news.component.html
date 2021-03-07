@@ -1,0 +1,67 @@
+
+<div class="bod">
+    <h1>Change this news</h1>
+</div>
+<br><br><br>
+<div class="bod">
+    <h3>You can change this news:</h3>
+</div>
+
+<div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+        <ul>
+            <li><button class="btn btn-link"(click)='route()'>My home</button></li>
+            <li><button class="btn btn-link" (click)='route1()'>My profile</button></li>
+            <li><button class="btn btn-link" (click)='route2()'>My subjects</button></li>
+            <li><button class="btn btn-link" (click)='route3()'>News</button></li>
+            <li><button class="btn btn-link" (click)='logout()'>Logout</button></li>
+        </ul>
+    </div>
+
+<div class="col-sm-10 col-md-10 col-lg-10 bod">
+    <table>
+        <tr>
+            <td>Title</td>
+            <td>
+                {{n.title}}
+            </td>
+            <td><input type="text" name="newTitle" [(ngModel)]='newTitle'></td>
+            <!-- <td colspan='2'><button (click)='changeTitle()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>Text</td>
+            <td>
+                {{n.text}}
+            </td>
+            <td>
+                <textarea name="newText" rows="7" cols="22" [(ngModel)]='newText'></textarea>
+            </td>
+            <!-- <td colspan='2'><button (click)='changeText()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>Subjects:</td>
+            <td>{{n.subjects}}</td>
+            <td>
+                <select id="subjects" name="newSubjects" multiple [(ngModel)]='newSubjects'>
+                <option *ngFor='let sub of subs' value={{sub}}>{{sub}}</option>
+                </select>
+        </td>
+        <!-- <td><button (click)='changeSubjects()'>Add</button></td> -->
+        </tr>
+        <tr>
+            <td>
+                File:
+            </td>
+            <td>{{n.picture}}</td>
+            <td><input type="file" name="newPicture" (change)='createFormData($event)'></td>
+            <td><button class="btn btn-info" (click)='changePicture()' >Add</button></td>
+        </tr>
+        <tr>
+            <td><button class="btn btn-info" (click)='changeNewsData()' >Change</button></td>
+
+        </tr>
+        <br>
+    </table>
+</div>
+</div>
+

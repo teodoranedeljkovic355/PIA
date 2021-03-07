@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="bod">
+        <h1>{{sub.name}}</h1>
+    </div>
+    <div class="bod">
+        <button class="btn btn-link" (click)='logout()' *ngIf='flagButton==1'>Logout</button>
+    </div>
+    <div class="bod">
+        <button class="btn btn-link" (click)='route()'>Go back</button>
+    </div>
+    <div class="bod">
+        <td><a (click)="download(sub.urleq)">{{sub.eq}}</a></td>
+    </div>
+</div>

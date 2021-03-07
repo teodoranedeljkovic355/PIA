@@ -1,0 +1,206 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { notificationModel } from '../model/notificationModel';
+import { SubjectModel } from '../model/subjectModel';
+import { User } from '../model/userModel';
+import { NewsServiceService } from '../news-service.service';
+
+@Component({
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.css']
+})
+export class NewsComponent implements OnInit {
+
+  constructor(private newsService: NewsServiceService, private router:Router) { }
+
+  ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    if(this.user.typeOf!="Employee")
+    {
+      localStorage.clear();
+      this.router.navigate(['']);
+    }
+    this.subs = this.user.subjects;
+    console.log(this.username)
+    this.username = this.user.username;
+    this.dateS = new Date();
+    this.date = this.dateS.toISOString();
+    /*this.newsService.getMyNews(this.subs).subscribe((mySubs:Array<Object>)=>{
+      this.mySubjects = mySubs;
+    })
+    console.log(this.mySubjects)*/
+    this.names = new Array();
+    for(var i in this.subs){
+      let n = this.subs[i].valueOf();
+     let nn =Object.values(this.subs[i]);
+      this.names.push(nn.toString());
+    }
+    this.myNews = new Array();
+    this.getMyNews();
+  }
+
+  user:User;
+  subjects:Array<String>;
+  subs:Array<Object>;
+  title: string;
+  text: string;
+  picture: File;
+  username:string;
+  poruka: string;
+  dateS: Date;
+  date:string;
+  names: Array<String>;
+  myNews: notificationModel[];
+  n: Object;
+  nn:string;
+
+  imefajla:string;
+  velicina:number;
+  
+
+  fd = new FormData();
+
+createFormData(event){
+  this.picture = <File>event.target.files[0];
+  this.fd.append('file', this.picture, this.picture['name']);
+  
+  ///////////////
+  var files = event.target.files;
+  this.imefajla = files[0].name;
+  this.velicina = files[0].size/1000;
+}
+
+
+
+
+upload(){
+  this.fd.append('username',this.username);
+  this.newsService.upload(this.fd);
+}
+addNews(){
+  this.newsService.addNews(this.title, this.text,this.subjects, this.date, this.picture['name'], this.username).subscribe((resp)=>{
+    if(resp['notification']!="ok"){
+      this.poruka='error';
+      
+    }
+    else{
+      alert("news added");
+      for(let i=0;i<this.subs.length;i++){
+        this.nn = this.subs[i].toString();
+        this.newsService.getNewsBySubjectName(this.nn).subscribe((notifications:notificationModel[])=>{
+          let trenArray = [];
+        trenArray = notifications;
+        trenArray.forEach(element => {
+          if((this.myNews.find(item=>item.title === element.title))===undefined)
+          this.myNews.push(element);
+        });
+        
+        console.log("my news:")
+        console.log(this.myNews);
+        console.log("notifications")
+        console.log(notifications);
+        })
+      }
+      this.upload();
+      this.newsService.dodajMaterijal(this.subjects[0],"lab", this.imefajla, this.velicina, this.user.username, "bre").subscribe();
+      this.poruka = 'error';
+    }
+  })
+}
+
+// getMyNews(){
+//   console.log("bitno")
+//   console.log(this.subs)
+//     for(let i=0;i<this.subs.length; i++){
+//       this.nn= this.subs[i].toString();
+//       console.log("ovo saljes")
+//       console.log(this.nn)
+//       this.newsService.getNewsBySubjectName(this.nn).subscribe((notifications:notificationModel[])=>{
+//         let trenArray = [];
+//         trenArray = notifications;
+//         trenArray.forEach(element=>{
+//           if((this.myNews.find(item=>item.title === element.title))===undefined)
+//           this.myNews.push(element);
+//         });
+//         console.log("my news:")
+//       console.log(this.myNews);
+//       console.log("notifications")
+//       console.log(notifications);
+//       })
+//     }
+//     console.log(this.myNews)
+// }
+
+
+getMyNews(){
+  for(let i=0;i<this.subs.length;i++){
+    this.nn = this.subs[i].toString();
+    this.newsService.getNewsBySubjectName(this.nn).subscribe((notifications:notificationModel[])=>{
+      let trenArray = [];
+    trenArray = notifications;
+    trenArray.forEach(element => {
+      if((this.myNews.find(item=>item.title === element.title))===undefined)
+      this.myNews.push(element);
+    });
+    
+    console.log("my news:")
+    console.log(this.myNews);
+    console.log("notifications")
+    console.log(notifications);
+    })
+  }
+}
+
+
+deleteMyNews(news){
+  this.newsService.deleteMyNews(news).subscribe((res)=>{
+    if(res['poruka']!="ok") alert("Error");
+    else{
+      // for(let i=0;i<this.subs.length;i++){
+      //   this.nn = this.subs[i].toString();
+      //   this.newsService.getNewsBySubjectName(this.nn).subscribe((notifications:notificationModel[])=>{
+      //     let trenArray = [];
+      //   trenArray = notifications;
+      //   trenArray.forEach(element => {
+      //     if((this.myNews.find(item=>item.title === element.title))===undefined)
+      //     this.myNews.push(element);
+      //   });
+      //   })
+      // }
+      
+      this.myNews.forEach( (item, index) => {​​​​​
+        if(item.title === news.title) this.myNews.splice(index,1);
+      }​​​​​);​​​​​
+
+      this.upload();
+      this.poruka = 'error';
+    }
+  })
+}
+
+update(news){
+  localStorage.setItem("news",JSON.stringify(news));
+  this.router.navigate(['/user/news/changeNews']);
+
+
+  this.newsService.dodajMaterijal(this.subjects[0],"lab", this.imefajla, this.velicina, this.user.username, "bre").subscribe();
+}
+logout(){
+  localStorage.clear();
+  this.router.navigate(['']);
+}
+route(){
+  this.router.navigate(['user']);
+}
+route1(){
+  this.router.navigate(['user/userProfile']);
+}
+route2(){
+  this.router.navigate(['user/profSubjects']);
+}
+route3(){
+  this.router.navigate(['user/news']);
+}
+}

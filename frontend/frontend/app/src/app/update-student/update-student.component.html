@@ -1,0 +1,88 @@
+<div class="container-fluid">
+
+<div class="bod">
+    <button class="btn btn-link" (click)='route()'>Go back</button>  <button class="btn btn-link" (click)='logout()'>Logout</button>
+</div>
+<div class="bod">
+    <h3>You can change student informations</h3>
+    <br>
+</div>
+<br>
+<div class="bod">
+    <h3>Update student:</h3>
+</div>
+<br><br>
+<div class="container table-responsive py-5">
+    <table class="table table-hover">
+        <tr>
+            <td>Username:</td>
+            <td>
+                {{updatingStudent.username}}
+            </td>
+            <td><input class="form-control" type="text" name="newUsernameS" [(ngModel)]="newUsernameS"></td>
+            <!-- <td colspan='2'><button (click)='changeUsernameS()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                {{updatingStudent.password}}
+            </td>
+            <td><input class="form-control" type="text" name="newPasswordS" [(ngModel)]="newPasswordS"></td>
+            <!-- <td colspan='2'><button (click)='changePasswordS()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                {{updatingStudent.name}}
+            </td>
+            <td><input   class="form-control" type="text" name="newNameS" [(ngModel)]="newNameS"></td>
+            <!-- <td colspan='2'><button (click)='changeNameS()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>Surname</td>
+            <td>
+                {{updatingStudent.surname}}
+            </td>
+            <td><input class="form-control" type="text" name="newSurnameS" [(ngModel)]="newSurnameS"></td>
+            <!-- <td colspan='2'><button (click)='changeSurnameS()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>
+                Index
+            </td>
+            <td>
+                {{updatingStudent.index}}
+            </td>
+            <td><input class="form-control" type="text" name="newIndexS" [(ngModel)]="newIndexS"></td>
+            <!-- <td colspan='2'><button (click)='changeIndexS()'>Change</button></td> -->
+        </tr>
+        <tr>
+            <td>Studies Type:</td>
+            <td>
+                {{updatingStudent.studiesType}}
+            </td>
+            <td>
+                <select class="form-control" name="newStudiesTypeS" [(ngModel)]="newStudiesTypeS">
+                                <option value="d">Bachelor studies</option>
+                                <option value="m">Master studies</option>
+                                <option value="p">PhD Studies</option>
+                </select>
+            </td>
+            
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>{{updatingStudent.status}}</td>
+            <select class="form-control" name="newStatusS" [(ngModel)]="newStatusS">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+            
+        </tr>
+        <tr>
+            <td><button class="btn btn-info" (click)='updateStudent()'>Update student</button></td>
+        </tr>
+    </table>
+    
+</div>
+</div>

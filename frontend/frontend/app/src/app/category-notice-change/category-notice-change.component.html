@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="bod">
+        <button class="btn btn-link" (click)='logout()'>Logout</button>
+    </div>
+<div class="bod">
+    <button class="btn btn-link" (click)='goBack()'>Go back</button>
+</div>
+    <div class="bod">
+        <h1>Please change your category or notice:</h1>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="bod">
+            <h3>You can change your category here:</h3>
+        </div>
+        <div class="container table-responsive py-5">
+            <table class="table table-hover">
+            <tr>
+                <td>{{c.typeOf}}</td>
+                <td><input class="form-control" type="text" name="newCategory" [(ngModel)]="newCategory"></td>
+            </tr>
+            <br>
+            <td><button class="btn btn-info" (click)='changeCategory()'>Change</button></td>
+        </table>
+    </div>
+    </div>
+    <!-- <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="bod">
+            <h3>You can change your notice here:</h3>
+        </div>
+        <div class="container table-responsive py-5">
+            <table class="table table-hover">
+                <tr *ngIf='notice!=null'>
+                    <td>{{notice.typeOf}}</td>
+                    <td>
+                        <select class="form-control" name="newTypeOf" [(ngModel)]="newTypeOf">
+                            <option *ngFor='let c of cats' value="{{c.typeOf}}">{{c.typeOf}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{notice.noticesText}}</td>
+                    <td><input class="form-control" type="text" name="newNoticesText" [(ngModel)]="newNoticesText"></td>
+                </tr>
+                <tr>
+                    <button *ngIf='notice!=null' class="btn btn-info" (click)='changeNotice()'>Change</button>
+                </tr>
+            </table>
+    </div>
+    </div> -->
+   
+</div>

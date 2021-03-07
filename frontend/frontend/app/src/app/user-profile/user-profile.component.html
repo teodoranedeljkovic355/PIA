@@ -1,0 +1,68 @@
+<div class="container-fluid">
+    <div class="bod">
+        <h1>Welcome {{username}}</h1>
+        </div>
+        
+        <div class="bod">
+            <h3>You can change your informations</h3>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2 offset-md-1 offset-sm-1 offset-lg-1">
+                <ul>
+                    <li><button class="btn btn-link"(click)='route()'>My home</button></li>
+                    <li><button class="btn btn-link" (click)='route1()'>My profile</button></li>
+                    <li><button class="btn btn-link" (click)='route2()'>My subjects</button></li>
+                    <li><button class="btn btn-link" (click)='route3()'>News</button></li>
+                    <li><button class="btn btn-link" (click)='logout()'>Logout</button></li>
+                </ul>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 bod">
+                <div class="container table-responsive py-5">
+                    <table class="table">
+                    <tr>
+                        <td>Adress</td>
+                        <td>
+                            {{u.adress}}
+                        </td>
+                        <td><input class="form-control" type="text" name="newAdress" [(ngModel)]='newAdress'></td>
+                        <!-- <td colspan='2'><button (click)='change()'>Change</button></td> -->
+                    </tr>
+                    <tr>
+                        <td>Mobile phone</td>
+                        <td>
+                            {{u.mobilePhone}}
+                        </td>
+                        <td><input class="form-control" type="text" name="newMobile" [(ngModel)]='newMobile'></td>
+                        <!-- <td colspan='2'><button (click)='changeMobile()'>Change</button></td> -->
+                    </tr>
+                    <tr>
+                        <td>Personal data</td>
+                        <td>
+                            {{u.personalData}}
+                        </td>
+                        <td>
+                            <textarea class="form-control" name="newPersonalData" rows="7" cols="22" [(ngModel)]='newPersonalData'></textarea>
+                        </td>
+                        <!-- <td colspan='2'><button (click)='changePersonalData()'>Change</button></td> -->
+                    </tr>
+                    <tr>
+                        <td>Room Number</td>
+                        <td>
+                            {{u.roomNumber}}
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" name="newRoomNumber" [(ngModel)]='newRoomNumber'>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="center" colspan='2'><button class="btn btn-info" (click)='changeUserData()'>Change</button></td>
+                    </tr>
+                    <br>
+                </table>
+            </div>
+            </div>
+        </div>
+        
+</div>

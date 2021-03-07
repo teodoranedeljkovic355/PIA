@@ -1,0 +1,300 @@
+<div class="container-fluid">
+  <div class="bod">
+    <h1>Welcome {{ username }}</h1>
+  </div>
+  <div class="bod">
+    <h3>You can change subjects</h3>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="offset-md-1 offset-sm-1 offset-lg-1 col-sm-2 col-md-2 col-lg-2">
+      <ul>
+        <li><button class="btn btn-link" (click)="route()">My home</button></li>
+        <li>
+          <button class="btn btn-link" (click)="route1()">My profile</button>
+        </li>
+        <li>
+          <button class="btn btn-link" (click)="route2()">My subjects</button>
+        </li>
+        <li><button class="btn btn-link" (click)="route3()">News</button></li>
+        <li><button class="btn btn-link" (click)="logout()">Logout</button></li>
+      </ul>
+    </div>
+    <div class="col-sm-2 com-md-2 com-lg-2">
+      <select class="form-control" id="chosenSubject" name="chosenSubject" [(ngModel)]="chosenSubject">
+        <option *ngFor="let sub of subs" value="{{ sub }}">{{ sub }}</option>
+      </select><br>
+      <button class="btn btn-info" (click)="searchThisSubject()">Choose</button>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 offset-lg-1 offset-sm-1 offset-md-1">
+      <ul>
+        <li>
+          <button class="btn btn-link" (click)='mainInfo()'>Main informations</button>
+        </li>
+        <li>
+          <button class="btn btn-link" (click)='excercises()'>Excercises</button>
+        </li>
+        <li>
+          <button class="btn btn-link" (click)='lectures()'>Lectures</button>
+        </li>
+        <li>
+          <button class="btn btn-link" (click)='laboratory()'>Laboratory</button>
+        </li>
+        <li>
+          <button class="btn btn-link" (click)='examQuestions()'>Exam questions</button>
+        </li>
+      </ul> 
+
+
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngIf='mainInfoFlag==1'>
+      <table>
+        <tr>
+          <td>Subject code:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.subjectCode }}</td>
+          <!-- <td><input type="text" name="newSubjectCode" [(ngModel)]="newSubjectCode"></td> -->
+        </tr>
+        <tr>
+          <td>Name:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.name }}</td>
+          <td>
+            <input class="form-control"
+              type="text"
+              name="newNameOfSubject"
+              [(ngModel)]="newNameOfSubject"
+            />
+          </td>
+        </tr><br>
+        <tr>
+          <td>Type of Subject:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.typeOfSubject }}</td>
+         <td><select class="form-control"  name="newTypeOfSubject"
+          [(ngModel)]="newTypeOfSubject">
+           <option value="Obligatory">Obligatory</option>
+           <option value="Electoral">Electoral</option>
+         </select></td>
+        </tr><br>
+        <tr>
+          <td>Year</td>
+          <td *ngIf="chosenSubject != null">{{ subject.yearOfStudies }}</td>
+          <td>
+            <select name="newYearOfStudies" [(ngModel)]="newYearOfStudies">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </td>
+        </tr><br>
+        <tr>
+          <td>Classes fond:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.classesFond }}</td>
+          <td>
+            <input class="form-control"
+              type="number"
+              name="newClassesFond"
+              [(ngModel)]="newClassesFond"
+            />
+          </td>
+        </tr><br>
+        <tr>
+          <td>Number of points: (ESPB)</td>
+          <td *ngIf="chosenSubject != null">{{ subject.numberOfPoints }}</td>
+          <td>
+            <input class="form-control"
+              type="number"
+              name="newNumberOfPoints"
+              [(ngModel)]="newNumberOfPoints"
+            />
+          </td>
+        </tr><br>
+        <tr>
+          <td>Goal of subject:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.goalOfSubject }}</td>
+          <td>
+            <textarea class="form-control"
+              name="newGoalOfSubject"
+              [(ngModel)]="newGoalOfSubject"
+              id="newGoalOfSubject"
+              cols="22"
+              rows="10"
+            ></textarea>
+          </td>
+        </tr><br>
+        <tr>
+          <td>Outcome of subject:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.outcomeOfSubject }}</td>
+          <td>
+            <textarea class="form-control"
+              name="newOutcomeOfSubject"
+              [(ngModel)]="newOutcomeOfSubject"
+              id="newOutcomeOfSubject"
+              cols="22"
+              rows="10"
+            ></textarea>
+          </td>
+        </tr><br>
+        <tr>
+          <td>Excercise term:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.excerciseTerm }}</td>
+          <td>
+            <input class="form-control"
+              type="text"
+              name="newExcerciseTerm"
+              [(ngModel)]="newExcerciseTerm"
+            />
+          </td>
+        </tr><br>
+        <tr>
+          <td>Lecture term:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.lectureTerm }}</td>
+          <td> 
+            <input class="form-control"
+              type="text"
+              name="newLectureTerm"
+              [(ngModel)]="newLectureTerm"
+            />
+          </td>
+        </tr><br>
+        <tr>
+          <td>Propositions:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.propositions }}</td>
+          <td>
+            <textarea class="form-control"
+              name="newPropositions"
+              [(ngModel)]="newPropositions"
+              id="newPropositions"
+              cols="22"
+              rows="10"
+            ></textarea>
+          </td>
+        </tr><br>
+        <tr>
+          <td>Laboratory:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.laboratory }}</td>
+          <td>
+            <select class="form-control" name="newLaboratory" [(ngModel)]="newLaboratory">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+        </tr><br>
+        <tr>
+          <td>Semester</td>
+          <td *ngIf="chosenSubject != null">{{ subject.semester }}</td>
+          <td>
+            <select class="form-control" name="newSemester" [(ngModel)]="newSemester">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </td>
+        </tr><br>
+        <tr>
+          <td>Department:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.department }}</td>
+          <td><select class="form-control" name="newDepartment" [(ngModel)]="newDepartment">
+            <option value="SI">SI</option>
+            <option value="RTI">RTI</option>
+            <option value="ELSE">ELSE</option>
+          </select></td>
+        </tr><br>
+        <tr>
+          <td>Master:</td>
+          <td *ngIf="chosenSubject != null">{{ subject.master }}</td>
+          <td>
+            <input class="form-control"
+              type="checkbox"
+              name="newMasterCheck"
+              [(ngModel)]="newMasterCheck"
+            />
+          </td>
+        </tr><br>
+        <tr>
+          <td><button class="btn btn-info" (click)="updateSubject()">Update subject</button></td>
+        </tr>
+      </table><br><br><br><br>
+  
+    </div>
+  
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngIf='lecturesFlag==1'>
+      <table>
+          <tr>
+              <td>Attach files for lectures:</td>
+              <td *ngIf="chosenSubject != null">{{ subject.v }}</td>
+          </tr>
+          <tr>
+            <td> <input class="form-control"
+              type="file"
+              name="pictureLectures"
+              (change)="createFormData1($event)"
+            /></td>
+            <td><button (click)='attachPicturesLectures()' class="form-control">Update</button></td>
+          </tr>
+      </table>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngIf='laboratoryFlag==1'>
+      <table>
+          <tr>
+              <td>Attach files for laboratory:</td>
+              <td *ngIf="chosenSubject != null">{{ subject.l }}</td>
+          </tr>
+          <tr>
+            <td> <input class="form-control"
+              type="file"
+              name="pictureLab"
+              (change)="createFormData2($event)"
+            /></td>
+            <td><button (click)='attachPicturesLaboratory()' class="form-control">Update</button></td>
+          </tr><br>
+          <tr>
+            <td>Leave a comment:</td>
+            <td *ngIf="chosenSubject != null">{{ subject.comment }}</td>
+            <td><textarea [(ngModel)]='commentLab' name="commentLab" id="commentLab" cols="20" rows="10"></textarea></td>
+            <td><button (click)='uploadComment()' class="form-control">Upload</button></td>
+          </tr>
+      </table>
+    </div>
+  
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngIf='examQuestionsFlag==1'>
+      <table>
+          <tr>
+              <td>Attach files for exam questions:</td>
+              <td *ngIf="chosenSubject != null">{{ subject.eq }}</td>
+          </tr>
+          <tr>
+            <td> <input class="form-control"
+              type="file"
+              name="pictureExamQ"
+              (change)="createFormData3($event)"
+            /></td>
+            <td><button (click)='attachPicturesExamQ()' class="form-control">Update</button></td>
+          </tr>
+      </table>
+    </div>
+  
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngIf='excercisesFlag==1'>
+      <table>
+          <tr>
+              <td>Attach files for excercises:</td>
+              <td *ngIf="chosenSubject != null">{{ subject.v }}</td>
+          </tr>
+          <tr>
+            <td> <input class="form-control"
+              type="file"
+              name="pictureExcercises"
+              (change)="createFormData4($event)"
+            /></td>
+            <td><button (click)='attachPicturesExcercises()' class="form-control">Update</button></td>
+          </tr>
+      </table>
+    </div>
+  
+  </div>
+  
+</div>

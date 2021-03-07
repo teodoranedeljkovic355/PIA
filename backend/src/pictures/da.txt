@@ -1,0 +1,9 @@
+- Elektronika (dolazi uvek jedan zadatak da se nacrta logicko i objasni)
+- Nesto iz 8086
+- Tastatura (od mene)
+- Cortex iz fajla Cortex-M3 programming manual - do 2.4 (ARM, Cortex, Embedded sistemi).
+- 03_STM32F103_Reference_Manual poglavlja 7, 9 i 13 pogledati 14, 19, 20
+- Zadatak iz UART-a (kao 2018. godine)
+- freeRTOS (ima prezentacija)
+- 2 pitanje parlelizam (Paralelizam.PDF)
+- zadatak za IT instukcijom

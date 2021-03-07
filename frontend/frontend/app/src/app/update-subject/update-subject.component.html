@@ -1,0 +1,122 @@
+
+<div class="container-fluid">
+  <div class="bod">  
+    <button class="btn btn-link" (click)='route()'>Go back</button>  <button class="btn btn-link" (click)='logout()'>Logout</button>
+  </div>
+  <div class="bod">
+    <h3>You can change subject informations</h3>
+    <br>
+  </div>
+  <br>
+  <div class="bod">
+    <h3>Update subject:</h3>
+  </div>
+  
+  <br><br>
+  <div class="container table-responsive py-5">
+    <table class="table table-hover">
+      <tr>
+        <td>Name:</td>
+        <td>{{updatingSubject.name}}</td>
+        <td><input class="form-control" type="text" name="newNameOfSubject" [(ngModel)]="newNameOfSubject" ></td>
+      </tr>
+      <tr>
+        <td>Subject code:</td>
+        <td>{{updatingSubject.subjectCode}}</td>
+       <td><input class="form-control" type="text" name="newSubjectCode" [(ngModel)]="newSubjectCode"></td>
+      </tr>
+      <tr>
+        <td>Type of Subject:</td>
+        <td>{{updatingSubject.typeOfSubject}}</td>
+        <td><select  class="form-control" name="newTypeOfSubject" [(ngModel)]="newTypeOfSubject">
+          <option value="Obligatory">Obavezni</option>
+          <option value="Electoral">Izborni</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td>Year</td>
+        <td>{{updatingSubject.yearOfStudies}}</td>
+        <td><select class="form-control" name="newYearOfStudies" [(ngModel)]="newYearOfStudies">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td>Classes fond:</td>
+        <td>{{updatingSubject.classesFond}}</td>
+        <td><input class="form-control" type="number" name="newClassesFond" [(ngModel)]="newClassesFond"></td>
+      </tr>
+      <tr>
+        <td>Number of points: (ESPB)</td>
+        <td>{{updatingSubject.numberOfPoints}}</td>
+        <td><input class="form-control" type="number" name="newNumberOfPoints" [(ngModel)]="newNumberOfPoints"></td>
+      </tr>
+      <tr>
+        <td>Goal of subject:</td>
+        <td>{{updatingSubject.goalOfSubject}}</td>
+        <td><textarea class="form-control" name="newGoalOfSubject" [(ngModel)]="newGoalOfSubject" id="newGoalOfSubject" cols="22" rows="10"></textarea></td>
+      </tr>
+      <tr>
+        <td>Outcome of subject:</td>
+        <td>{{updatingSubject.outcomeOfSubject}}</td>
+        <td><textarea class="form-control" name="newOutcomeOfSubject" [(ngModel)]="newOutcomeOfSubject" id="newOutcomeOfSubject" cols="22" rows="10"></textarea></td>
+      </tr>
+      <tr>
+        <td>Excercise term:</td>
+        <td>{{updatingSubject.excerciseTerm}}</td>
+        <td><input class="form-control" type="text" name="newExcerciseTerm" [(ngModel)]="newExcerciseTerm"></td>
+      </tr>
+      <tr>
+        <td>Lecture term:</td>
+        <td>{{updatingSubject.lectureTerm}}</td>
+        <td><input class="form-control" type="text" name="newLectureTerm" [(ngModel)]="newLectureTerm"></td>
+      </tr>
+      <tr>
+        <td>Propositions:</td>
+        <td>{{updatingSubject.propositions}}</td>
+        <td><textarea class="form-control" name="newPropositions" [(ngModel)]="newPropositions" id="newPropositions" cols="22" rows="10"></textarea></td>
+      </tr>
+      <tr>
+        <td>Laboratory:</td>
+        <td>{{updatingSubject.laboratory}}</td>
+          <td><select class="form-control" name="newLaboratory" [(ngModel)]="newLaboratory">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td>Semester</td>
+        <td>{{updatingSubject.semester}}</td>
+        <td><select class="form-control" name="newSemester" [(ngModel)]="newSemester">
+          <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td>Master:</td>
+        <td>{{updatingSubject.master}}</td>
+        <td><input class="form-control" type="checkbox" name="newMasterCheck" [(ngModel)]="newMasterCheck"></td>
+      </tr>
+      <tr>
+        <td>Department:</td>
+        <td>{{updatingSubject.department}}</td>
+        <td><select class="form-control" name="newDepartment" [(ngModel)]="newDepartment">
+          <option value="SI">SI</option>
+          <option value="RTI">RTI</option>
+          <option value="ELSE">ELSE</option>
+        </select></td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-info" (click)='updateSubject()'>Update subject</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

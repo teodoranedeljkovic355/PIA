@@ -1,0 +1,476 @@
+
+<div class="container-fluid">
+  <div class="bod">
+    <h1>Welcome {{ usernameWelcome }} !</h1>
+  </div>
+  <div class="bod">
+    <button class="btn btn-link" (click)="logout()">Logout</button>
+  </div>
+  <div class="bod">
+    <button class="btn btn-link" (click)="getCSV()">Get CSV</button>
+  </div>
+  <br /><br />
+  
+  <div class="row">
+    <div class="col-sm-4 col-md-4 col-lg-4 offset-md-1 offset-lg-1 offset-sm-1">
+      <h3>Register employee:</h3>
+    <br>
+        <div class="container table-responsive py-5">
+          <table class="table table-hover">
+          <tr>
+            <td>Username:</td>
+            <td>
+              <input class="form-control"
+                type="text"
+                name="username"
+                [(ngModel)]="username"
+                required
+                data-errormessage-value-missing="Please input something"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Password:</td>
+            <td>
+              <input class="form-control"
+                type="password"
+                name="password"
+                [(ngModel)]="password"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td><input class="form-control" type="text" name="name" [(ngModel)]="name" required /></td>
+          </tr>
+          <tr>
+            <td>Surname:</td>
+            <td>
+              <input class="form-control" type="text" name="surname" [(ngModel)]="surname" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Adress:(example: Vuka Karadzica 19, Lazarevac)</td>
+            <td>
+              <input class="form-control" type="text" name="adress" [(ngModel)]="adress" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Mobile phone: <i>(Optional)</i></td>
+            <td>
+              <input class="form-control" type="text" name="mobilePhone" [(ngModel)]="mobilePhone" />
+            </td>
+          </tr>
+          <tr>
+            <td>Website: <i>(Optional)</i></td>
+            <td><input class="form-control" type="text" name="website" [(ngModel)]="website" /></td>
+          </tr>
+          <tr>
+            <td>Personal data: <i>(Optional)</i></td>
+            <td>
+              <textarea class="form-control"
+                name="personalData"
+                rows="7"
+                cols="22"
+                [(ngModel)]="personalData"
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>Profession:</td>
+  
+            <td>
+              <select class="form-control"
+                id="profession"
+                name="profession"
+                [(ngModel)]="profession"
+                required
+              >
+                <option value="Full Time Professor">Full time professor</option>
+                <option value="Associate Professor">Associate professor</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Assistant">Assistant</option>
+                <option value="Teaching Associate">Teaching Associate</option>
+                <option value="Researcher">Researcher</option>
+                <option value="Labaratory Engineer">Laboratory Engineer</option>
+                <option value="Labaratory Technician">
+                  Laboratory Technician
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Room number:</td>
+            <td>
+              <input class="form-control"
+                type="text"
+                name="roomNumber"
+                [(ngModel)]="roomNumber"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>
+              <input class="form-control"
+                type="radio"
+                name="status"
+                value="Active"
+                [(ngModel)]="status"
+                required
+              />
+              Active
+            
+              <input class="form-control"
+                type="radio"
+                name="status"
+                value="Inactive"
+                [(ngModel)]="status"
+                required
+              />
+              Inactive
+            </td>
+          </tr>
+          <tr>
+            <td>Picture: <i>(Optional)</i></td>
+            <td>
+              <input class="form-control"
+                type="file"
+                name="picture"
+                (change)="createFormData($event)"
+              />
+            </td>
+          </tr>
+          <br />
+          <tr>
+            <td>
+              <button class="btn btn-info" (click)="registerEmployee()">Register employee</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+<br><br>
+      <h3>Add new category of notices:</h3>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+          <tr>
+            <td>Type in new category:</td>
+            <td><input class="form-control" type="text" name="newCategory" [(ngModel)]="newCategory"></td>
+          </tr>
+          <tr><button class="btn btn-info" (click)='addNewCategory()'>Add</button></tr>
+        </table>
+        <br>
+        <table class="table">
+          <tr *ngFor='let c of allCategories'>
+            <td>{{c.typeOf}}</td>
+            <td><button class="btn btn-info" (click)='updateCategory(c)'>Update</button></td>
+            <td><button class="btn btn-info" (click)='deleteCategory(c)'>Delete</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <h3>Register student:</h3>
+      <br>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+          <tr>
+            <td>Username:</td>
+            <td>
+              <input class="form-control"
+                type="text"
+                name="usernameS"
+                [(ngModel)]="usernameS"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Password:</td>
+            <td>
+              <input class="form-control"
+                type="password"
+                name="passwordS"
+                [(ngModel)]="passwordS"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Index number:</td>
+            <td>
+              <input class="form-control" type="text" name="index" [(ngModel)]="index" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Studies type:</td>
+            <td>
+              <select class="form-control"
+                id="studiesType"
+                name="studiesType"
+                [(ngModel)]="studiesType"
+                required
+              >
+                <option value="d">Bachelor studies</option>
+                <option value="m">Master studies</option>
+                <option value="p">PHD studies</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td>
+              <input class="form-control" type="text" name="nameS" [(ngModel)]="nameS" required />
+            </td>
+          </tr>
+          <tr>
+            <td>Surname:</td>
+            <td>
+              <input class="form-control"
+                type="text"
+                name="surnameS"
+                [(ngModel)]="surnameS"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Status:</td>
+            <td>
+              <input  class="form-control"
+                type="radio"
+                name="statusS"
+                value="Active"
+                [(ngModel)]="statusS"
+                required
+              />
+              Active
+              <input  class="form-control"
+                type="radio"
+                name="statusS"
+                value="Inactive"
+                [(ngModel)]="statusS"
+                required
+              />
+              Inactive
+            </td>
+          </tr>
+          <br />
+          <tr>
+            <td><button class="btn btn-info" (click)="registerStudent()">Register student</button></td>
+          </tr>
+        </table>
+      </div>
+      <br><br><br>
+      <h3>Add students to some subjects:</h3>
+      <br>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+          <td>Student:</td>
+        <td>
+          <select class="form-control" name="chosenStudent" [(ngModel)]="chosenStudent">
+            <option *ngFor='let s of students' value={{s.username}}>{{s.username}}</option>
+          </select>
+        </td>
+        <td>Subjects:</td>
+        <td>
+          <select class="form-control" name="chosenSubjects" [(ngModel)]="chosenSubjects" multiple>
+            <option *ngFor='let s of subjects' value={{s.subjectCode}}>{{s.subjectCode}}</option>
+          </select>
+        </td>
+        </tr>
+        <tr>
+          <td><button class="btn btn-info" (click)='addStudentToSubjects()'>Add</button></td>
+        </tr>
+      </table>
+      <br><br><br><br>
+      <h3>Add new notices:</h3>
+      <br>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+          <tr>
+            <td>Choose category:</td>
+            <td>Type text:</td>
+          </tr>
+          <tr>
+            <td><select class="form-control" name="chosenCategory" [(ngModel)]="chosenCategory">
+              <option *ngFor='let c of allCategories' value="{{c.typeOf}}">{{c.typeOf}}</option>
+            </select></td>
+            <td><textarea name="noticesText" [(ngModel)]="noticesText" cols="30" rows="10"></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2"><button class="btn btn-info" (click)='addNewNotice()'>Add</button></td>
+          </tr>
+        </table>
+        <br>
+        <h3>Notices:</h3>
+        <div class="container table-responsive py-5">
+          <table class="table table-hover">
+          <tr *ngFor='let n of allNotices'>
+            <td>{{n.typeOf}} : </td>
+            <td>{{n.noticesText}}</td>
+            <!-- <td><button (click)='updateNotice(n)' class='btn btn-info'>Update</button></td> -->
+            <td><button (click)='deleteNotice(n)' class='btn btn-info'>Delete</button></td>
+          </tr>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+    <div class='col-sm-3 col-md-3 col-lg-3 '>
+      <h3>Add new subject</h3>
+      <br>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+          <td>Name:</td>
+          <td><input class="form-control" type="text" name="nameOfSubject" [(ngModel)]="nameOfSubject"></td>
+        </tr>
+        <tr>
+          <td>Subject code:</td>
+          <td><input class="form-control" type="text" name="subjectCode" [(ngModel)]="subjectCode"></td>
+        </tr>
+        <tr>
+          <td>Type of Subject:</td>
+          <td><select class="form-control" name="typeOfSubject" [(ngModel)]="typeOfSubject">
+            <option value="Electoral">Izborni</option>
+            <option value="Obligatory">Obavezan</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Year</td>
+          <td><select class="form-control" name="yearOfStudies" [(ngModel)]="yearOfStudies">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Classes fond:</td>
+          <td><input class="form-control" type="number" name="classesFond" [(ngModel)]="classesFond"></td>
+        </tr>
+        <tr>
+          <td>Number of points: (ESPB)</td>
+          <td><input class="form-control" type="number" name="numberOfPoints" [(ngModel)]="numberOfPoints"></td>
+        </tr>
+        <tr>
+          <td>Goal of subject:</td>
+          <td><textarea class="form-control" name="goalOfSubject" [(ngModel)]="goalOfSubject" id="goalOfSubject" cols="22" rows="10"></textarea></td>
+        </tr>
+        <tr>
+          <td>Outcome of subject:</td>
+          <td><textarea class="form-control" name="outcomeOfSubject" [(ngModel)]="outcomeOfSubject" id="outcomeOfSubject" cols="22" rows="10"></textarea></td>
+        </tr>
+        <tr>
+          <td>Excercise term:</td>
+          <td><input class="form-control" type="text" name="excerciseTerm" [(ngModel)]="excerciseTerm"></td>
+        </tr>
+        <tr>
+          <td>Lecture term:</td>
+          <td><input class="form-control" type="text" name="lectureTerm" [(ngModel)]="lectureTerm"></td>
+        </tr>
+        <tr>
+          <td>Propositions:</td>
+          <td><textarea class="form-control" name="propositions" [(ngModel)]="propositions" id="propositions" cols="22" rows="10"></textarea></td>
+        </tr>
+        <tr>
+          <td>Laboratory:</td>
+            <td><select class="form-control" name="laboratory" [(ngModel)]="laboratory">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td>Semester</td>
+          <td><select class="form-control" name="semester" [(ngModel)]="semester">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Department:</td>
+          <td><select class="form-control" name="department" [(ngModel)]="department">
+            <option value="SI">SI</option>
+            <option value="RTI">RTI</option>
+            <option value="ELSE">ELSE</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>Master:</td>
+          <td><input class="form-control" type="checkbox" name="masterS" [(ngModel)]="masterS" value="1"></td>
+        </tr>
+        <tr>
+          <td><button class="btn btn-info" (click)='addSubject()'>Add</button></td>
+        </tr>
+      </table>
+    </div></div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <h3>Employees</h3>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+          <td>Name</td>
+          <td>Surname</td>
+          <td>Email</td>
+        </tr>
+        <tr *ngFor="let e of employees">
+          <td>{{ e.name }}</td>
+          <td>{{ e.surname }}</td>
+          <td>{{ e.mail }}</td>
+          <td><button class="btn btn-info" (click)="updateEmployee(e)">Update</button></td>
+          <td><button class="btn btn-info" (click)='deleteEmployee(e)'>Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 ">
+      <h3>Students</h3>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+          <td>Name</td>
+          <td>Surname</td>
+          <td>Email</td>
+        </tr>
+        <tr *ngFor="let s of students">
+          <td>{{ s.name }}</td>
+          <td>{{ s.surname }}</td>
+          <td>{{ s.mail }}</td>
+          <td><button class="btn btn-info"(click)="updateStudent(s)">Update</button></td>
+          <td><button class="btn btn-info" (click)='deleteStudent(s)'>Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <h3>Subjects</h3>
+      <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+          <td>Name</td>
+          <td>Subject code</td>
+        </tr>
+        <tr *ngFor='let subj of subjects'>
+          <td>{{subj.name}}</td>
+          <td>{{subj.subjectCode}}</td>
+          <td><button class="btn btn-info" (click)="updateSubject(subj)">Update</button></td>
+          <td><button class="btn btn-info" (click)='deleteSubject(subj)'>Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,145 @@
+<div class="container-fluid">
+
+<div class="bod">
+    <button class="btn btn-link" (click)='route()'>Go back</button>  <button class="btn btn-link" (click)='logout()'>Logout</button>
+</div>
+<div class="bod">
+    <h3>You can change employee informations</h3>
+</div>
+<br><br>
+<div class="bod">
+<h3>Update employee:</h3>
+</div>
+<div class="bod">
+    <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+            <td>Username:</td>
+            <td>
+                {{updatingUser.username}}
+            </td>
+            <td><input class="form-control" type="text" name="newUsername" [(ngModel)]="newUsername"></td>
+            
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                {{updatingUser.password}}
+            </td>
+            <td><input class="form-control" type="text" name="newPassword" [(ngModel)]="newPassword"></td>
+           
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                {{updatingUser.name}}
+            </td>
+            <td><input class="form-control" type="text" name="newName" [(ngModel)]="newName"></td>
+            
+        </tr>
+        <tr>
+            <td>Surname</td>
+            <td>
+                {{updatingUser.surname}}
+            </td>
+            <td><input class="form-control" type="text" name="newSurname" [(ngModel)]="newSurname"></td>
+            
+        </tr>
+        <tr>
+            <td>Adress</td>
+            <td>
+                {{updatingUser.adress}}
+            </td>
+            <td><input class="form-control" type="text" name="newAdress" [(ngModel)]='newAdress'></td>
+            
+        </tr>
+        <tr>
+            <td>Mobile phone</td>
+            <td>
+                {{updatingUser.mobilePhone}}
+            </td>
+            <td><input class="form-control" type="text" name="newMobile" [(ngModel)]='newMobile'></td>
+         
+        </tr>
+        <tr>
+            <td>
+                Website
+            </td>
+            <td>
+                {{updatingUser.website}}
+            </td>
+            <td><input class="form-control" type="text" name="newWebsite" [(ngModel)]="newWebsite"></td>
+            
+        </tr>
+        <tr>
+            <td>Personal data</td>
+            <td>
+                {{updatingUser.personalData}}
+            </td>
+            <td>
+                <textarea class="form-control" name="newPersonalData" rows="7" cols="22" [(ngModel)]="newPersonalData"></textarea>
+            </td>
+            
+        </tr>
+        <tr>
+            <td>Profession:</td>
+            <td>
+                {{updatingUser.profession}}
+            </td>
+            <td>
+                <select class="form-control" name="newProfession" [(ngModel)]="newProfession">
+                    <option value="Full Time Professor">Full time professor</option>
+                                <option value="Associate Professor">Associate professor</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Assistant">Assistant</option>
+                                <option value="Teaching Associate">Teaching Associate</option>
+                                <option value="Researcher">Researcher</option>
+                                <option value="Labaratory Engineer">Laboratory Engineer</option>
+                                <option value="LabaratoryTechnician">Laboratory Technician</option>
+                </select>
+            </td>
+          
+        </tr>
+        <tr>
+            <td>Room Number</td>
+            <td>
+                {{updatingUser.roomNumber}}
+            </td>
+            <td>
+                <input class="form-control" type="text" name="newRoomNumber" [(ngModel)]='newRoomNumber'>
+            </td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>{{updatingUser.status}}</td>
+            <select class="form-control" name="newStatus" [(ngModel)]="newStatus">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+        </tr>
+        <tr>
+            <td>Picture: <i>(Optional)</i></td>
+            <td>{{updatingUser.picture}}</td>
+            <td><input class="form-control" type="file" name="newPicture" (change)='createFormData($event)'></td>
+           <td><button class="btn btn-info" (click)='changePicture()'>Change</button></td>
+        </tr>
+        <tr>
+            <td>Subjects</td>
+               <td>
+                <p>{{updatingUser.subjects}}</p>
+            </td>
+            <td>
+                <select class="form-control" id="newSubjects" name="newSubjects" multiple [(ngModel)]='newSubjects'>
+                <option *ngFor='let sub of subs' value={{sub.name}}>{{sub.name}}</option>
+                </select>
+        </td>
+       
+        </tr>
+        <tr>
+            <td><button class="btn btn-info" (click)='updateEmployee()'>Update employee</button></td>
+        </tr>
+        <br>
+    </table>
+    
+</div>
+</div>

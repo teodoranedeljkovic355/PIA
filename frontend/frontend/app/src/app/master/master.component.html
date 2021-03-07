@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class='bod'>
+        <h1>Master studies subjects:</h1>
+    </div>
+    <div class="bod">
+        <button class="btn btn-link" (click)='logout()' *ngIf='flagButton==1'>Logout</button>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-4">
+            Each course carries 6 ECTS credits and there are usually five classes per week in each subject. There is a set list of courses in each study module. There are three compulsory courses in each module and students can choose the rest of the courses from either the same module or another module. There is also an possibility for students to take two courses from the field of humanities instead of one elective course, since these courses carry 3 ECTS credits.
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-sm-4 offset-sm-4">
+            <div class="container table-responsive py-5">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <td>Name:</td>
+                    <td>Semester:</td>
+                    <td>Department:</td>
+                    <td><b>Show more:</b></td>
+                </tr>
+                <tr *ngFor='let sub1 of sem1Master'>
+                    <td>{{sub1.name}}</td>
+                    <td>{{sub1.semester}}</td>
+                    <td>{{sub1.department}}</td>
+                    <td>
+                        <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub1)'>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+</div>

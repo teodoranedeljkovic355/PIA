@@ -1,0 +1,96 @@
+
+
+<div class="container">
+
+    <div class="center">
+        <h1>RTI Website</h1>
+        <br><br>
+        <h3>Login:</h3>
+        <div class="bod">
+            <form>
+                <table>
+                    <tr>
+                        <td>Username:</td>
+                        <td><input class="form-control" type="text" name="username" [(ngModel)]='username' required></td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input  class="form-control" type="password" name="password" [(ngModel)]='password' required></td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td>Type:</td>
+                        <td>
+                            <select  class="form-control" id="typeOf" name="typeOf" [(ngModel)]='typeOf' required>
+                                <option value="Admin">Admin</option>
+                                <option value="Student">Student</option>
+                                <option value="Employee">Employee</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <br>
+                    <tr>
+                        <td></td>
+                        <td><button class="btn btn-primary" (click)='validate()'>Login</button></td>
+                    </tr><br>
+                    <tr>
+                      <td class="red" colspan="2">{{message}}</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <br>
+    <h3>Register:</h3>
+    <div class="bod">
+        <table>
+            <tr></tr>
+            <tr>
+                <td></td>
+                <td><a routerLink='register'>Register</a></td>
+            </tr> <br>
+        </table>
+    </div>
+    </div>
+
+    <div class="row bod">
+      <h5>Our mission:</h5>
+      <br>
+      <i>To provide students with a top education in the field of electrical engineering and computer science, encouraging their creativity, responsibility, research spirit and teamwork. To provide companies with exceptional engineers, who will be able to improve their productivity, innovation and competitiveness on the market, primarily in Serbia, but also anywhere in the world. To permanently contribute to technological progress, informatization and the overall level of development of our country.
+      </i>
+      </div> <br>
+    <!-- Each carousel needs a unique ID -->
+    <div id="carousel-id" class="carousel slide" data-ride="carousel">
+  
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+          <img src="https://www.workday.upenn.edu/images/default-source/landing-page-hero-images/ledger-connections-1200x400.jpg?sfvrsn=d6e68f56_2" alt="First slide" class="img-fluid">
+        </div>
+        <div class="carousel-item">
+          <img src="https://www.bu.edu/met/files/2020/09/courses-cybersecurity-hero-1200x400.jpg" alt="First slide" class="img-fluid">
+        </div>
+        <div class="carousel-item">
+          <img src="https://www.bu.edu/met/files/2020/09/csit-sa-hero-1200x400.jpg" alt="First slide" class="img-fluid">
+        </div>
+      </div>
+  
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+      <p class="text-xs-center">
+        <a class="" href="#carousel-id" role="button" data-slide="prev">
+          <span class="icon-prev" aria-hidden="true"></span> Previous
+        </a>&emsp;
+        <a class="l" href="#carousel-id" role="button" data-slide="next">
+          <span class="icon-next" aria-hidden="true"></span> Next
+        </a>
+      </p>
+      <!-- /.text-center -->
+    </div>
+  <!-- /.carousel -->
+    <br>
+    <br>
+  </div>
+  <!-- /.container -->

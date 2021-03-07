@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand"><img src="../../assets/logo.jpg" width="50px" height="50px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" [class.active]="navFlag=='home'">
+          <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" [class.active]="navFlag=='staff'">
+          <a class="nav-link" routerLink="staff">Staff</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bachelor studies
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" (click)='routeRTI()' routerLink="rtibsc">RTI</a>
+              <a class="dropdown-item" (click)='routeSI()' routerLink="sibsc">SI</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)='routeELSE()'routerLink="elsebsc">Else</a>
+            </div>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)='routeMASTER()' routerLink="master">Master studies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="notices">Notices</a>
+      </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdowns" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Science
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdowns">
+              <a class="dropdown-item" routerLink="research">Research</a>
+              <a class="dropdown-item" routerLink="projects">Projects</a>
+              <div class="dropdown-divider"></div>
+            </div>
+          </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <!-- <button *ngIf='user!=undefined' class="btn btn-dark" (click)='logout()'>Logout</button> -->
+        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+      </form>
+    </div>
+  </nav>

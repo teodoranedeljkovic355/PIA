@@ -1,0 +1,60 @@
+<div class="bod">
+    <h1>Please fill in this form:</h1>
+    <br><br><br>
+</div>
+
+<div class="bod">
+    
+    <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+            <td>Username</td>
+            <td><input required class="form-control" required type="text" name="username" [(ngModel)]='usernameS'></td>
+        </tr>
+        <tr>
+            <td>Pasword</td>
+            <td><input required class="form-control" required type="password" name="password" [(ngModel)]='passwordS'></td>
+        </tr>
+        <tr>
+            <td>Index number:(YYYY/nnnn)</td>
+            <td><input class="form-control" required type="text" name="index" [(ngModel)]='index'></td>
+        </tr>
+        <tr>
+            <td>Studies type:</td>
+            <td>
+                <select required class="form-control"
+                  id="studiesType"
+                  name="studiesType"
+                  [(ngModel)]="studiesType"
+                  required
+                >
+                  <option value="d">Bachelor studies</option>
+                  <option value="m">Master studies</option>
+                  <option value="p">PHD studies</option>
+                </select>
+              </td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input required required class="form-control" type="text" name="nameStudent" [(ngModel)]='nameS'></td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td><input required  required class="form-control" type="text" name="surnameStudent" [(ngModel)]='surnameS'></td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td><input required class="form-control" type="radio" name="statusStudent" value="Active" [(ngModel)]='statusS'>Active</td>
+            <td><input required class="form-control" type="radio" name="statusStudent" value="Inactive" [(ngModel)]='statusS'>Inactive</td>
+        </tr>
+        <tr>
+            <td>
+                <button class="btn btn-info" (click)='validate()'>Register</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="red">{{message}}</td>
+        </tr>
+    </table>
+</div>
+</div>

@@ -1,0 +1,175 @@
+<div class="container-fluid">
+    <div class="bod">
+        <h1>Department of RTI</h1>
+    </div>
+    <div class="bod">
+        <button class="btn btn-link" (click)='logout()' *ngIf='flagButton==1'>Logout</button>
+    </div>
+    <br><br>
+    <div class="row">
+    <div class="col-md-4 offset-md-4 col-lg-4 offset-lg-4 col-sm-4 offset-sm-4">
+        <div class="container table-responsive py-5">
+        <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub1 of sem1Sub'>
+            <td>{{sub1.name}}</td>
+            <td>{{sub1.semester}}</td>
+            <td>{{sub1.yearOfStudies}}</td>
+            <td>{{sub1.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub1)'>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+            
+        </tr>
+        <tr *ngFor='let sub2 of sem2Sub'>
+            <td>{{sub2.name}}</td>
+            <td>{{sub2.semester}}</td>
+            <td>{{sub2.yearOfStudies}}</td>
+            <td>{{sub2.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub2)'>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub3 of sem3Sub'>
+            <td>{{sub3.name}}</td>
+            <td>{{sub3.semester}}</td>
+            <td>{{sub3.yearOfStudies}}</td>
+            <td>{{sub3.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub3)'>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub4 of sem4Sub'>
+            <td>{{sub4.name}}</td>
+            <td>{{sub4.semester}}</td>
+            <td>{{sub4.yearOfStudies}}</td>
+            <td>{{sub4.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub4)'>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub5 of sem5Sub'>
+            <td>{{sub5.name}}</td>
+            <td>{{sub5.semester}}</td>
+            <td>{{sub5.yearOfStudies}}</td>
+            <td>{{sub5.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub5)'>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub6 of sem6Sub'>
+            <td>{{sub6.name}}</td>
+            <td>{{sub6.semester}}</td>
+            <td>{{sub6.yearOfStudies}}</td>
+            <td>{{sub6.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub6)'>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub7 of sem7Sub'>
+            <td>{{sub7.name}}</td>
+            <td>{{sub7.semester}}</td>
+            <td>{{sub7.yearOfStudies}}</td>
+            <td>{{sub7.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub7)'>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="container table-responsive py-5">
+    <table class="table table-bordered table-hover">
+        
+        <tr>
+            <td>Name:</td>
+            <td>Semester:</td>
+            <td>Year:</td>
+            <td>Department:</td>
+            <td><b>Show more:</b></td>
+        </tr>
+        <tr *ngFor='let sub8 of sem8Sub'>
+            <td>{{sub8.name}}</td>
+            <td>{{sub8.semester}}</td>
+            <td>{{sub8.yearOfStudies}}</td>
+            <td>{{sub8.department}}</td>
+            <td>
+                <input class="btn btn-info" type='button' *ngIf='flag==1' value="showAbout" (click)='showAbout(sub8)'>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</div>
+</div>

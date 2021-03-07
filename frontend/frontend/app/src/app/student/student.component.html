@@ -1,0 +1,52 @@
+
+<div class="bod">
+    <h1>Welcome {{u.username}}</h1>
+</div>
+<br><br>
+
+<div class="bodys">
+    <div class="waviy">
+      <span style="--i:1">g</span>
+      <span style="--i:2">e</span>
+      <span style="--i:3">t</span>
+      <span style="--i:4">w</span>
+      <span style="--i:5">o</span>
+      <span style="--i:6">r</span>
+      <span style="--i:7">k</span>
+      <span style="--i:8">i</span>
+      <span style="--i:9">n</span>
+      <span style="--i:10">g</span>
+     </div>
+</div>
+<br>
+
+
+<div class="bod">
+    <h3>Your informations:</h3>
+</div>
+<br>
+<div class="bod">
+    <button (click)='logout()' class="btn btn-link">Logout</button>
+</div>
+<div class="bod">
+    <button (click)='changePass()' class="btn btn-link">Change password</button>
+</div>
+<br>
+<div class="bod">
+    <div class="container table-responsive py-5">
+        <table class="table table-hover">
+        <tr>
+            <td>Name</td>
+            <td>{{u.name}}</td>
+        </tr>
+        <tr>
+            <td>Surname</td>
+            <td>{{u.surname}}</td>
+        </tr>
+        <tr>
+            <td>Index</td>
+            <td>{{u.index}}</td>
+        </tr>
+    </table>
+</div>
+</div>

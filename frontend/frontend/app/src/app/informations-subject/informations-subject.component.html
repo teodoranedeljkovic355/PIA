@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <div class="bod">
+        <h1>{{sub.name}}</h1>
+    </div>
+    <div class="bod">
+        <button class="btn btn-link" (click)='logout()' *ngIf='flagButton==1'>Logout</button>
+    </div>
+    <div class="bod">
+        <button class="btn btn-link" (click)='route()'>Go back</button>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 offset-sm-4 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
+            <div class="container table-responsive py-5">
+                <table class="table table-bordered table-hover">
+                <tr>
+                    <td>Subject code:</td>
+                    <td>{{sub.subjectCode}}</td>
+                </tr>
+                <tr>
+                    <td>Type of Subject:</td>
+                    <td>{{sub.typeOfSubject}}</td>
+                </tr>
+                <tr>
+                    <td>Year of Studies:</td>
+                    <td>{{sub.yearOfStudies}}</td>
+                </tr>
+                <tr>
+                    <td>Semester:</td>
+                    <td>{{sub.semester}}</td>
+                </tr>
+                <tr>
+                    <td>Department:</td>
+                    <td>{{sub.department}}</td>
+                </tr>
+                <tr>
+                    <td>Classes fond:</td>
+                    <td>{{sub.classesFond}}</td>
+                </tr>
+                <tr>
+                    <td>Number of points:</td>
+                    <td>{{sub.numberOfPoints}} ESPB</td>
+                </tr>
+                <tr>
+                    <td>Goal of the Subject:</td>
+                    <td>{{sub.goalOfSubject}}</td>
+                </tr>
+                <tr>
+                    <td>Outcome od the Subject:</td>
+                    <td>{{sub.outcomeOfSubject}}</td>
+                </tr>
+                <tr>
+                    <td>Excercise term:</td>
+                    <td>{{sub.excerciseTerm}}</td>
+                </tr>
+                <tr>
+                    <td>Lecture Term:</td>
+                    <td>{{sub.lectureTerm}}</td>
+                </tr>
+                <tr>
+                    <td>Poopositions:</td>
+                    <td>{{sub.propositions}}</td>
+                </tr>
+                <tr>
+                    <td>Laboratory:</td>
+                    <td>{{sub.laboratory}}</td>
+                </tr>
+                <tr>
+                    <td>Master:</td>
+                    <td>{{sub.master}}</td>
+                </tr>
+                
+            </table>
+        </div>
+        </div>
+    </div>
+</div>
